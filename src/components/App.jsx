@@ -31,8 +31,9 @@ export const App = () => {
       case 'text':
         setName(val);
         break;
-      case 'tel':
+       case 'tel':
          setNumber(val);
+         break;
       default:
         return;
     }
