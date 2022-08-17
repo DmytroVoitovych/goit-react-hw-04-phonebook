@@ -1,4 +1,3 @@
-// import { ContactBook } from "./ContactBook/ContactBook";
 import {useState, useEffect} from "react";
 import { nanoid } from 'nanoid';
 import { Phonebook } from "components/Phonebook/Phonebook";
@@ -35,7 +34,7 @@ export const App = () => {
       case 'tel':
          setNumber(val);
       default:
-        break;
+        return;
     }
    }; 
   
