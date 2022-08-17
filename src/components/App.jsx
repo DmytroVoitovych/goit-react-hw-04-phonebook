@@ -1,3 +1,5 @@
+import { ContactBook } from "./ContactBook/ContactBook";
+
 export const App = () => {
   return (
     <div
@@ -7,10 +9,13 @@ export const App = () => {
         justifyContent: 'center',
         alignItems: 'center',
         fontSize: 40,
-        color: '#010101'
+        color: '#010101',
+        padding: '0 15px'
       }}
     >
-      React homework template
+
+      
+      <ContactBook />      
     </div>
   );
 };
