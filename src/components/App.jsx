@@ -1,4 +1,4 @@
-import {useState, useEffect} from "react";
+import {useState, useEffect, useMemo} from "react";
 import { nanoid } from 'nanoid';
 import { Phonebook } from "components/Phonebook/Phonebook";
 import { Contacts } from "components/Contacts/Contacts";
@@ -55,11 +55,11 @@ export const App = () => {
  
   const  changeFilter = (e) => { setFilter( e.currentTarget.value) }; // значение фильтра
    
- const contactFiltering = () => { // фильтрация контактов
-     const normalizeFilter = filter.toLowerCase();
-        return contacts.filter(contact => contact.name.toLowerCase().includes(normalizeFilter)
-            || contact.number.toLowerCase().includes(normalizeFilter));
-    }  //добавил еще фильтер и по номеру
+  const contactFiltering =  useMemo(() => { // фильтрация контактов // мемо чисто что бы не было перерендера когда изменяется велью
+    const normalizeFilter = filter.toLowerCase();
+    return contacts.filter(contact => contact.name.toLowerCase().includes(normalizeFilter)
+      || contact.number.toLowerCase().includes(normalizeFilter));
+  }, [contacts, filter]); //добавил еще фильтер и по номеру 
 
   return (
     <div
@@ -77,7 +77,7 @@ export const App = () => {
             {<Phonebook input={getValueInput} val={{ name: name, tel: number }} btn={setContactsName} />}
            <div> <h3>Contacts</h3>
             {<Filter changes={changeFilter}  filter={filter}/> }
-          {<Contacts contacts={contactFiltering()} away={deleteContact} />}
+          {<Contacts contacts={contactFiltering} away={deleteContact} />}
                 </div>
         </section >
     </div>
